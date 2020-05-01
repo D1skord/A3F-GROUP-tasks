@@ -1,0 +1,12 @@
+/* Контакты, имеющие больше 5 друзей */
+SELECT contact.* FROM contact, contact_friend WHERE contact.id = contact_friend.contact_id GROUP BY contact.id HAVING COUNT(contact.id) > 5
+
+/* Вывод всех взаимных друзей */
+select c.name, c2.name from contact_friend cf
+ 	/* Собираем пары друзей */
+    join contact_friend cf2 ON cf.contact_id = cf2.friend_id and cf.friend_id = cf2.contact_id
+    /* Присоединяем к id имена */
+    join contact c on c.id = cf.contact_id 
+    join contact c2 on c2.id = cf2.contact_id
+    /* Первое имя в паре у контакта с меньшим id */
+    where cf.contact_id < cf2.contact_id

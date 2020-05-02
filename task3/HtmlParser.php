@@ -54,9 +54,9 @@ class HtmlParser
         $tags = [];
         if (!empty($pageContent = $this->getPage())) {
             // Начало с '<'
-            // затем любые строчные или заглавные буквы или цифры, в произвольном кол-ве
-            // в конце 'пробел' или '>'
-            $regexpTag = '/<([a-z1-9A-Z]*)[ |>]/';
+            // затем любые строчные || заглавные буквы || цифры || '!' || '!--', в произвольном кол-ве
+            // в конце 'пробел' || '>'
+            $regexpTag = '/<([a-z1-9A-Z!--]*)[ |>]/';
             preg_match_all($regexpTag, $pageContent, $matchesTag);
             $tags = array_count_values($matchesTag[1]);
         }
